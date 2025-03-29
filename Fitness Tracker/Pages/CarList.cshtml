@@ -1,0 +1,74 @@
+﻿@page
+@using Fitness_Tracker.Model
+@model Fitness_Tracker.Pages.CarListModel
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@{
+}
+<!DOCTYPE html>
+<html lang="bg">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Workout Planner - Главна</title>
+    <!-- css linganginlingigng -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+    <header class="bg-primary text-white p-3">
+        <div class="container d-flex justify-content-between align-items-center">
+            <h1 class="h3 mb-0">Workout Planner</h1>
+            <a class="btn btn-light" asp-page="./Index">Logout</a>
+        </div>
+    </header>
+
+    <div class="container mt-4">
+        <!-- wuzzah wuzahsadddddddddddddddddddddo -->
+        <!-- uhh lets drop drown lets drop down to business -->
+        <section id="Cars">
+            <div class="Card">
+                <div class="Card-body">
+
+                    @if (Model.User.IsAdmin)
+                    {
+                        <form method="post">
+                            <select id="selectedDate" name="selectedDate" class="form-control" required>
+                                <div class="form-group">
+                                    <label asp-for="Car.Date" class="control-label">Date:</label>
+                                    <input asp-for="Car.Date" class="form-control" placeholder="Enter Name"/>
+                                    <span asp-validation-for="Car.Date" class="text-danger"></span>
+                                </div>
+                            </select>
+                        <input type="hidden" name="selectedDate" value="2025-03-01">
+                        <div class="form-group">
+                            <label asp-for="Car.Name" class="control-label">New Car:</label>
+                            <input asp-for="Car.Name" class="form-control" placeholder="Enter Name" />
+                            <span asp-validation-for="Car.Name" class="text-danger"></span>
+                        </div>
+                        <button type="submit" class="btn btn-success">Add New Car</button>
+                    </form>
+                    }
+                    <form method="post">
+                    <ul class="list-group mb-3 container d-flex justify-content-between">
+                            @foreach (Car Car in Model.Cars){
+                                        <li class="list-group-item mt-3 d-flex justify-content-between align-items-center">
+                                            @Car.Name @Car.Date
+                                                <span>
+                                                    <!-- edits -->
+                                                    
+                                                        <button type="submit" class="btn btn-sm btn-outline-secondary" asp-page="./Edit" asp-route-id="@Car.ID">>Edit</button>
+                                                    
+                                                    <!-- deletes -->
+                                                    
+                                                        <button type="submit" value=@Car.ID class="btn btn-sm btn-outline-danger" asp-page-handler="Delete" asp-route-ID=@Car.ID>Delete</button>
+                                                    
+                                                </span>
+                                        </li>
+                                      }
+                    </form>
+                </ul>
+            </div>
+    </div>
+    </section>
+    </div>
+</body>
+</html>

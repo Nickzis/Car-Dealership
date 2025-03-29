@@ -1,0 +1,14 @@
+﻿using Microsoft.EntityFrameworkCore;
+
+namespace Fitness_Tracker.Model
+{
+    public class TrackerContext : DbContext
+    {
+        public DbSet<User> Users { get; set; }
+        public DbSet<Car> Cars { get; set; }
+        public TrackerContext(DbContextOptions options) :base(options)
+        {
+            
+        }
+    }
+}

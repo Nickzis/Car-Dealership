@@ -1,0 +1,52 @@
+﻿@page
+@model Fitness_Tracker.Pages.LogInModel
+@{
+}
+<html lang="bg">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login - Workout Planner</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet"
+          href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" />
+    <style>
+        body {
+            background-color: #f8f9fa;
+        }
+
+        .login-container {
+            height: 100vh;
+        }
+    </style>
+</head>
+<body>
+    <div class="container login-container">
+        <div class="row justify-content-center align-items-center h-100">
+            <div class="col-md-4">
+                <div class="Card shadow">
+                    <div class="Card-body">
+                        <h3 class="Card-title text-center mb-4">Login</h3>
+                        <form id="loginForm"method="post">
+                            <div class="form-group">
+                                <label asp-for="User.Name" class="control-label"></label>
+                                <input asp-for="User.Name" class="form-control" />
+                                <span asp-validation-for="User.Name" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="User.Password" class="control-label"></label>
+                                <input asp-for="User.Password" class="form-control" />
+                                <span asp-validation-for="User.Password" class="text-danger"></span>
+                            </div>
+                            <button type="submit" class="btn btn-primary btn-block" value="Login">
+                                Login
+                            </button>
+                        </form>
+                        <div id="loginMessage" class="mt-3"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
