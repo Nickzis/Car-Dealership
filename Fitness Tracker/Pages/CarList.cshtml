@@ -31,36 +31,48 @@
                     @if (Model.User.IsAdmin)
                     {
                         <form method="post">
-                            <select id="selectedDate" name="selectedDate" class="form-control" required>
-                                <div class="form-group">
-                                    <label asp-for="Car.Date" class="control-label">Date:</label>
-                                    <input asp-for="Car.Date" class="form-control" placeholder="Enter Name"/>
-                                    <span asp-validation-for="Car.Date" class="text-danger"></span>
-                                </div>
-                            </select>
-                        <input type="hidden" name="selectedDate" value="2025-03-01">
-                        <div class="form-group">
-                            <label asp-for="Car.Name" class="control-label">New Car:</label>
-                            <input asp-for="Car.Name" class="form-control" placeholder="Enter Name" />
-                            <span asp-validation-for="Car.Name" class="text-danger"></span>
-                        </div>
-                        <button type="submit" class="btn btn-success">Add New Car</button>
-                    </form>
+                            <div class="form-group">
+                                <label asp-for="Car.Date" class="control-label">Date:</label>
+                                <input asp-for="Car.Date" class="form-control" placeholder="Enter Date"/>
+                                <span asp-validation-for="Car.Date" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="Car.Name" class="control-label">New Car:</label>
+                                <input asp-for="Car.Name" class="form-control" placeholder="Enter Name" />
+                                <span asp-validation-for="Car.Name" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="Car.PassengerSeats" class="control-label">Passenger seats:</label>
+                                <input asp-for="Car.PassengerSeats" class="form-control" placeholder="Enter Passenger seat count" />
+                                <span asp-validation-for="Car.PassengerSeats" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="Car.Description" class="control-label">Description:</label>
+                                <input asp-for="Car.Description" class="form-control" placeholder="Enter Description" />
+                                <span asp-validation-for="Car.Description" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="Car.PricePerDay" class="control-label">PricePerDay:</label>
+                                <input asp-for="Car.PricePerDay" class="form-control" placeholder="Enter PricePerDay" />
+                                <span asp-validation-for="Car.PricePerDay" class="text-danger"></span>
+                            </div>
+                            <button type="submit" class="btn btn-success">Add New Car</button>
+                        </form>
                     }
                     <form method="post">
-                    <ul class="list-group mb-3 container d-flex justify-content-between">
-                            @foreach (Car Car in Model.Cars){
-                                        <li class="list-group-item mt-3 d-flex justify-content-between align-items-center">
-                                            @Car.Name @Car.Date
+                        <ul class="list-group mb-3 container d-flex justify-content-between">
+                            @foreach (Car CarVroom in Model.Cars){
+                                <li class="list-group-item mt-3 d-flex justify-content-between align-items-center">
+                                            @CarVroom.Name @CarVroom.Date @CarVroom.ID
                                                 <span>
                                                     <!-- edits -->
                                                     
-                                                        <button type="submit" class="btn btn-sm btn-outline-secondary" asp-page="./Edit" asp-route-id="@Car.ID">>Edit</button>
+                                                        <button type="submit" value=@CarVroom.ID class="btn btn-sm btn-outline-secondary" asp-page-handler="Id" asp-area="" asp-page="/Edit" asp-route-id=@CarVroom.ID >>View</button>
                                                     
                                                     <!-- deletes -->
-                                                    
-                                                        <button type="submit" value=@Car.ID class="btn btn-sm btn-outline-danger" asp-page-handler="Delete" asp-route-ID=@Car.ID>Delete</button>
-                                                    
+                                        @if (Model.User.IsAdmin){
+                                                        <button type="submit" value=@CarVroom.ID class="btn btn-sm btn-outline-danger" asp-page-handler="Delete" asp-route-ID=@CarVroom.ID>Delete</button>
+                                        }
                                                 </span>
                                         </li>
                                       }

@@ -39,6 +39,10 @@ namespace Fitness_Tracker.Pages
         [BindProperty]
         public Car Car { get; set; } = default!;
         public User User { get; set; } = new User();
+        public IActionResult OnPostEdit()
+        {
+            return RedirectToPage("./Edit");
+        }
         public async Task<IActionResult> OnPostAsync()
         {
             if (!ModelState.IsValid)

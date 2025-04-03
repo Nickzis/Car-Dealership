@@ -9,26 +9,39 @@ namespace Fitness_Tracker.Pages
     {
         private readonly Fitness_Tracker.Model.TrackerContext _context;
         public List<Car> Cars { get; set; } = new List<Car>();
+        public List<User> Users { get; set; } = new List<User>();
         public EditModel(Fitness_Tracker.Model.TrackerContext context)
         {
             _context = context;
         }
         [BindProperty]
-        public Car Car { get; set; } = default!;
+        public Car Car { get; set; } = new Car();
+        public Car CurrentCar { get; set; } = new Car();
 
-        public async Task<IActionResult> OnGetAsync(int? id)
+        public User User { get; set; } = new User();
+        public IActionResult OnPostId(int? id)
         {
+            Users = _context.Users.ToList();
+            foreach (var user in Users)
+            {
+                if (user.CurrentUser)
+                    User = user;
+            }
+            if (User == null)
+            {
+                return NotFound();
+            }
+
             if (id == null)
             {
                 return NotFound();
             }
 
-            var Car = await _context.Cars.FirstOrDefaultAsync(m => m.ID == id);
-            if (Car == null)
+            CurrentCar = _context.Cars.FirstOrDefault(m => m.ID == id);
+            if (CurrentCar == null)
             {
                 return NotFound();
             }
-            Car = Car;
             return Page();
         }
 
