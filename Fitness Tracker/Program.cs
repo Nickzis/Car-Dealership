@@ -14,7 +14,7 @@ namespace Fitness_Tracker
             
             builder.Services.AddDbContext<TrackerContext>(options =>
             {
-                options.UseSqlServer("Server=DESKTOP-D0CPLTH\\SQLEXPRESS01;Database=TrackerDB;Trusted_Connection=True;TrustServerCertificate=True");
+                options.UseSqlServer("Server=DESKTOP-B7I2EPC\\SQLEXPRESS;Database=TrackerDB;Trusted_Connection=True;TrustServerCertificate=True");
             });
             
             var app = builder.Build();

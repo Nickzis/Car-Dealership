@@ -1,0 +1,29 @@
+﻿@page
+@model Fitness_Tracker.Pages.QuerieListModel
+@{
+    ViewData["Title"] = "Queried Results";
+}
+
+<h2>Queried Results</h2>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Car</th>
+            <th>User</th>
+            <th>Start Date</th>
+            <th>End Date</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var querie in Model.Querries)
+        {
+            <tr>
+                <td>@querie.CarId</td>
+                <td>@querie.UserId</td>
+                <td>@querie.StartDate.ToShortDateString()</td>
+                <td>@querie.EndDate.ToShortDateString()</td>
+            </tr>
+        }
+    </tbody>
+</table>
